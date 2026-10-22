@@ -84,7 +84,7 @@ show_arabic_about = (
 
 st.set_page_config(
     page_title="DevManTurbo ⚡",
-    page_icon="🤖",
+    page_icon=str(Path(__file__).with_name("assets") / "favicon.png"),
     layout="wide",
     initial_sidebar_state="auto",
     menu_items={
@@ -113,7 +113,31 @@ st.set_page_config(
 # 也会让新用户误以为需要安装额外组件。这里统一隐藏 Streamlit 平台工具栏，
 # 并压缩主容器顶部留白，只保留项目自己的标题、语言选择和业务设置区域。
 style_file = Path(__file__).with_name("styles.css")
-streamlit_style = f"<style>{style_file.read_text(encoding='utf-8')}</style>"
+def _devman_font_css() -> str:
+    """تضمين الخطوط داخل الصفحة حتى تعمل الواجهة بدون إنترنت."""
+    import base64
+    fonts_dir = Path(__file__).with_name("assets") / "fonts"
+    faces = (
+        ("Geist", "Geist-Variable.woff2", "100 900"),
+        ("IBM Plex Sans Arabic", "PlexArabic-400.woff2", "400"),
+        ("IBM Plex Sans Arabic", "PlexArabic-500.woff2", "500"),
+        ("IBM Plex Sans Arabic", "PlexArabic-600.woff2", "600"),
+    )
+    css = []
+    for family, name, weight in faces:
+        try:
+            data = base64.b64encode((fonts_dir / name).read_bytes()).decode()
+        except OSError:
+            continue
+        css.append(
+            f'@font-face{{font-family:"{family}";font-weight:{weight};font-display:swap;'
+            f'src:url(data:font/woff2;base64,{data}) format("woff2");}}'
+        )
+    return "".join(css)
+
+
+_DEVMAN_FONT_CSS = _devman_font_css()
+streamlit_style = f"<style>{_DEVMAN_FONT_CSS}{style_file.read_text(encoding='utf-8')}</style>"
 # 定义资源目录
 font_dir = utils.font_dir()
 song_dir = utils.song_dir()
@@ -1772,7 +1796,7 @@ def _render_brand(available_update: str | None = None):
     st.markdown(
         f"""
         <h1 class="mpt-brand">
-            <span class="mpt-brand__name">DevManTurbo ⚡</span>
+            <span class="mpt-brand__name">DevManTurbo</span>
             <a class="mpt-brand__version"
                href="https://github.com/harry0703/MoneyPrinterTurbo"
                target="_blank"

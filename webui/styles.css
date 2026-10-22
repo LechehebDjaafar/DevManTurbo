@@ -210,12 +210,6 @@ div[class*="st-key-voice_mode_control"] [role="radiogroup"] > button p {
     outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .mpt-brand__update {
-        color: #ff6b6b !important;
-    }
-}
-
 /* Streamlit 会自动给 h1 追加一个标题锚点。品牌区已有版本号项目链接，额外的
    标题锚点没有实际价值，因此只在这个标题内隐藏，避免窄屏出现多余图标。 */
 .mpt-brand > [data-testid="stHeaderActionElements"] {
@@ -533,3 +527,114 @@ div[class*="st-key-task_row_"] button[kind="secondary"] p {
         min-width: 1.75rem !important;
     }
 }
+
+/* ===== DevManTurbo design layer — مبني على variables.css / DESIGN.md ===== */
+:root{
+--color-canvas:#f5f5f5;--color-paper:#fff;--color-surface-alt:#fafafa;--color-ink:#0a0a0a;--color-ink-soft:#171717;--color-mid-gray:#737373;--color-hairline:#e5e5e5;--color-ember:#e7000b;
+--font-geist:'Geist','IBM Plex Sans Arabic',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Tahoma,sans-serif;
+--radius-btn:18px;--radius-card:24px;--radius-nested:10px;
+--shadow-subtle:oklab(.145 -.00000143796 .00000340492/.05) 0 0 0 1px,rgba(0,0,0,.1) 0 1px 3px 0,rgba(0,0,0,.1) 0 1px 2px -1px}
+html,body,.stApp,[data-testid="stApp"]{color-scheme:light;background:var(--color-canvas)!important;color:var(--color-ink)!important}
+.stApp,.stApp p,.stApp label,.stApp h1,.stApp h2,.stApp h3,.stApp h4,.stApp h5,.stApp h6,.stApp li,.stApp summary,.stApp button,.stApp input,.stApp textarea,.stApp a,.stApp [data-baseweb] div,.stApp [data-testid="stMarkdownContainer"] span{font-family:var(--font-geist)}
+[data-testid="stAppViewContainer"],[data-testid="stMain"]{background:var(--color-canvas)!important}
+[data-testid="stMainBlockContainer"]{max-width:1280px!important;padding:24px clamp(16px,3vw,40px) 64px!important}
+[data-testid="stSidebar"]{background:var(--color-surface-alt)!important;border-inline-end:1px solid var(--color-hairline)}
+:focus-visible{outline:2px solid var(--color-ink)!important;outline-offset:2px}
+::selection{background:var(--color-ink);color:var(--color-surface-alt)}
+*{scrollbar-width:thin;scrollbar-color:var(--color-hairline) transparent}
+
+/* العلامة */
+.mpt-brand{display:flex!important;align-items:center;gap:14px;padding:8px 0 4px!important}
+.mpt-brand > span:first-child{align-items:center!important;gap:14px!important}
+.mpt-brand__name{display:inline-flex;align-items:center;gap:14px;font-size:48px!important;line-height:1.1!important;font-weight:600!important;letter-spacing:-2.4px!important;color:var(--color-ink)!important;direction:ltr}
+.mpt-brand__name::before{content:"";flex:none;width:52px;height:52px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%230a0a0a'/%3E%3Cpath d='M22 7 11 22h8l-1.5 11L29 18h-8z' fill='%23fff'/%3E%3Ccircle cx='31' cy='9' r='3' fill='%23e7000b'/%3E%3C/svg%3E") center/contain no-repeat}
+.mpt-brand__version{display:inline-flex!important;align-items:center;padding:2px 10px;border:1px solid var(--color-hairline);border-radius:18px;background:var(--color-paper);font-size:12px!important;font-weight:500!important;color:var(--color-mid-gray)!important;opacity:1!important;letter-spacing:0}
+.mpt-brand__update{color:var(--color-ember)!important;font-size:12px!important}
+@media(max-width:700px){.mpt-brand__name{font-size:30px!important;letter-spacing:-1px!important}.mpt-brand__name::before{width:36px;height:36px}}
+
+/* البطاقات: الحاويات ذات الحدود فقط (بدون مفتاح st-key) */
+[data-testid="stLayoutWrapper"] > [data-testid="stVerticalBlock"]:not([class*="st-key-"]){background:var(--color-paper);border-color:var(--color-hairline)!important;border-radius:var(--radius-card)!important;box-shadow:var(--shadow-subtle);padding:20px!important}
+[data-testid="stLayoutWrapper"] > [data-testid="stVerticalBlock"]:not([class*="st-key-"]) [data-testid="stLayoutWrapper"] > [data-testid="stVerticalBlock"]:not([class*="st-key-"]){box-shadow:none;border-radius:var(--radius-nested)!important;background:var(--color-surface-alt)}
+
+/* النصوص */
+h1,h2,h3,h4,h5,h6{color:var(--color-ink)!important;font-weight:600!important;letter-spacing:0!important}
+h4,h3{font-size:18px!important;line-height:1.56!important;padding:0 0 4px!important}
+[data-testid="stMarkdownContainer"] p,[data-testid="stMarkdownContainer"] li{font-size:14px;line-height:1.7}
+[data-testid="stWidgetLabel"] p,label p{font-size:14px!important;font-weight:500!important;color:var(--color-ink)!important}
+[data-testid="stCaptionContainer"],[data-testid="stCaptionContainer"] p,small{color:var(--color-mid-gray)!important;font-size:12px!important}
+a{color:var(--color-ink);text-underline-offset:3px}
+[data-testid="stTooltipIcon"] svg,[data-testid="stTooltipHoverTarget"] svg{color:var(--color-mid-gray)!important}
+
+/* الحقول */
+[data-baseweb="input"],[data-baseweb="base-input"],[data-baseweb="textarea"],[data-baseweb="select"] > div{background:var(--color-canvas)!important;border:1px solid transparent!important;border-radius:var(--radius-btn)!important;box-shadow:none!important;transition:background .15s,border-color .15s}
+[data-baseweb="input"] input,[data-baseweb="base-input"] input,[data-baseweb="textarea"] textarea,[data-baseweb="base-input"],[data-baseweb="textarea"] > div{background:transparent!important;color:var(--color-ink)!important;-webkit-text-fill-color:var(--color-ink)}
+[data-baseweb="input"]:focus-within,[data-baseweb="textarea"]:focus-within,[data-baseweb="select"]:focus-within > div{background:var(--color-paper)!important;border-color:var(--color-hairline)!important;box-shadow:0 0 0 2px rgba(10,10,10,.08)!important}
+input::placeholder,textarea::placeholder{color:var(--color-mid-gray)!important;-webkit-text-fill-color:var(--color-mid-gray)!important;opacity:1}
+[data-baseweb="select"] svg,[data-testid="stNumberInputStepDown"] svg,[data-testid="stNumberInputStepUp"] svg{color:var(--color-mid-gray)!important;fill:var(--color-mid-gray)!important}
+[data-testid="stNumberInputStepDown"],[data-testid="stNumberInputStepUp"]{background:transparent!important}
+[data-baseweb="select"] span,[data-baseweb="select"] div{color:var(--color-ink)}
+[data-testid="stColorPickerBlock"]{border-radius:14px!important;border:1px solid var(--color-hairline)!important}
+
+/* القوائم المنسدلة والنوافذ العائمة */
+[data-baseweb="popover"] > div,[data-baseweb="menu"],ul[role="listbox"]{background:var(--color-paper)!important;border:1px solid var(--color-hairline)!important;border-radius:var(--radius-btn)!important;box-shadow:var(--shadow-subtle)!important;overflow:hidden}
+li[role="option"]{background:transparent!important;color:var(--color-ink)!important;border-radius:12px;margin:2px 4px;font-size:14px}
+li[role="option"]:hover,li[role="option"][aria-selected="true"]{background:var(--color-canvas)!important}
+[data-testid="stPopoverBody"]{background:var(--color-paper)!important;border:1px solid var(--color-hairline)!important;border-radius:var(--radius-card)!important;box-shadow:var(--shadow-subtle)!important}
+[data-testid="stDialog"] div[role="dialog"]{background:var(--color-paper)!important;border:1px solid var(--color-hairline);border-radius:var(--radius-card)!important;box-shadow:var(--shadow-subtle)!important}
+[data-testid="stDialog"]{background:rgba(10,10,10,.25)!important}
+[data-testid="stTooltipContent"],[data-baseweb="tooltip"] > div{background:var(--color-ink)!important;color:var(--color-surface-alt)!important;border-radius:12px!important}
+
+/* الأزرار */
+button[kind="primary"],button[kind="primaryFormSubmit"]{background:var(--color-ink)!important;color:var(--color-surface-alt)!important;border:1px solid var(--color-ink)!important;border-radius:var(--radius-btn)!important;min-height:38px;font-weight:500!important;box-shadow:none!important;transition:background .15s}
+button[kind="primary"] p,button[kind="primaryFormSubmit"] p{color:var(--color-surface-alt)!important}
+button[kind="primary"]:hover,button[kind="primaryFormSubmit"]:hover{background:var(--color-ink-soft)!important;border-color:var(--color-ink-soft)!important}
+button[kind="secondary"],button[kind="secondaryFormSubmit"],[data-testid="stDownloadButton"] button,[data-testid="stFileUploader"] button{background:transparent!important;color:var(--color-ink)!important;border:1px solid var(--color-hairline)!important;border-radius:var(--radius-btn)!important;min-height:38px;font-weight:500!important;box-shadow:none!important;transition:background .15s}
+button[kind="secondary"]:hover,button[kind="secondaryFormSubmit"]:hover,[data-testid="stDownloadButton"] button:hover{background:var(--color-canvas)!important;border-color:var(--color-hairline)!important}
+button[kind="secondary"] p,button[kind="secondaryFormSubmit"] p{color:var(--color-ink)!important}
+button[kind="tertiary"],button[kind="tertiary"] p{color:var(--color-ink)!important}
+button:disabled{opacity:.45!important}
+
+/* مفاتيح التحديد والأشرطة */
+[data-baseweb="checkbox"] > span:first-child,[data-baseweb="radio"] > div:first-child{border-radius:6px}
+[data-testid="stCheckbox"] label span[role="checkbox"],[data-baseweb="checkbox"] span:first-child{border-color:var(--color-mid-gray)!important}
+[data-testid="stSliderThumbValue"]{color:var(--color-ink)!important;font-weight:600;font-size:13px}
+[data-testid="stSliderTickBar"],[data-testid="stSliderTickBarMin"],[data-testid="stSliderTickBarMax"]{color:var(--color-mid-gray)!important}
+[data-testid="stProgressBarTrack"],[data-testid="stProgress"] > div > div{background:var(--color-hairline)!important;border-radius:6px}
+[data-testid="stProgress"] [role="progressbar"] > div{background:var(--color-ink)!important}
+
+/* مجموعة الأزرار (segmented / radio أفقي) */
+[data-testid="stButtonGroup"]{background:var(--color-canvas);padding:4px;border-radius:var(--radius-btn);gap:4px}
+[data-testid="stButtonGroup"] button{border:0!important;background:transparent!important;border-radius:14px!important;color:var(--color-mid-gray)!important;font-weight:500!important;min-height:34px}
+[data-testid="stButtonGroup"] button p{color:inherit!important}
+[data-testid="stButtonGroup"] button[aria-checked="true"],[data-testid="stButtonGroup"] button[aria-pressed="true"],[data-testid="stButtonGroup"] button[data-selected="true"]{background:var(--color-paper)!important;color:var(--color-ink)!important;box-shadow:var(--shadow-subtle)!important}
+
+/* expander / tabs / alerts */
+[data-testid="stExpander"] details{border:1px solid var(--color-hairline)!important;border-radius:var(--radius-btn)!important;background:transparent!important}
+[data-testid="stExpander"] summary{border-radius:var(--radius-btn);color:var(--color-ink)}
+[data-testid="stExpander"] summary:hover{background:var(--color-canvas)}
+[data-baseweb="tab-list"]{gap:4px;border-bottom:1px solid var(--color-hairline)}
+button[data-baseweb="tab"]{background:transparent!important;color:var(--color-mid-gray)!important;font-weight:500}
+button[data-baseweb="tab"][aria-selected="true"]{color:var(--color-ink)!important}
+[data-baseweb="tab-highlight"]{background:var(--color-ink)!important;height:2px}
+[data-baseweb="tab-border"]{background:transparent!important}
+[data-testid="stAlert"],[data-testid="stAlertContainer"]{background:var(--color-surface-alt)!important;border:1px solid var(--color-hairline);border-radius:var(--radius-btn)!important;color:var(--color-ink)!important}
+[data-testid="stAlert"] *{color:var(--color-ink)!important}
+[data-testid="stAlert"]:has([data-testid="stAlertContentError"]),[data-testid="stAlertContainer"]:has([data-testid="stAlertContentError"]){border-color:var(--color-ember)}
+[data-testid="stAlert"]:has([data-testid="stAlertContentError"]) svg{color:var(--color-ember)!important;fill:var(--color-ember)!important}
+[data-testid="stFileUploaderDropzone"]{background:var(--color-canvas)!important;border:1px dashed var(--color-hairline)!important;border-radius:var(--radius-btn)!important}
+[data-testid="stFileUploaderDropzone"] *{color:var(--color-ink)!important}
+[data-testid="stCode"],pre{background:var(--color-canvas)!important;border-radius:var(--radius-btn)!important}
+code{background:var(--color-canvas)!important;color:var(--color-ink)!important;border-radius:6px;padding:1px 6px}
+[data-testid="stVideo"] video,[data-testid="stAudio"] audio,[data-testid="stImage"] img{border-radius:var(--radius-nested)}
+[data-testid="stToast"],[data-testid="stToastContainer"] > div{background:var(--color-ink)!important;color:var(--color-surface-alt)!important;border-radius:var(--radius-btn)!important}
+[data-testid="stToast"] *{color:var(--color-surface-alt)!important}
+hr{border-color:var(--color-hairline)!important}
+[data-testid="stSpinner"] *{color:var(--color-mid-gray)!important}
+
+/* العربية: بدون تباعد سالب بين الحروف حتى لا تنفصل */
+body:has(.devman-arabic-mode) h1:not(.mpt-brand),body:has(.devman-arabic-mode) h2,body:has(.devman-arabic-mode) h3,body:has(.devman-arabic-mode) h4{letter-spacing:0!important}
+body:has(.devman-arabic-mode) .stApp,body:has(.devman-arabic-mode) .stApp p,body:has(.devman-arabic-mode) .stApp label,body:has(.devman-arabic-mode) .stApp li,body:has(.devman-arabic-mode) .stApp button,body:has(.devman-arabic-mode) .stApp input,body:has(.devman-arabic-mode) .stApp textarea,body:has(.devman-arabic-mode) .stApp h2,body:has(.devman-arabic-mode) .stApp h3,body:has(.devman-arabic-mode) .stApp h4,body:has(.devman-arabic-mode) .stApp [data-baseweb] div{font-family:'IBM Plex Sans Arabic','Geist',Tahoma,sans-serif}
+body:has(.devman-arabic-mode) .mpt-brand__name{font-family:Geist,sans-serif}
+
+@media(min-width:701px) and (max-width:1500px){.mpt-brand__name{font-size:38px!important}.mpt-brand__name::before{width:42px;height:42px}}
+[data-baseweb] input:focus-visible,[data-baseweb] textarea:focus-visible,[data-baseweb="select"] *:focus-visible{outline:none!important}
