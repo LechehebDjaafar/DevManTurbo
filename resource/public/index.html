@@ -1,37 +1,143 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DevManTurbo ⚡ — إنشاء الفيديو بالذكاء الاصطناعي</title>
-    <style>
-        body {
-            max-width: 52rem;
-            margin: 4rem auto;
-            padding: 0 1.5rem;
-            color: #202a31;
-            font-family: Tahoma, "Segoe UI", sans-serif;
-            line-height: 1.9;
-            text-align: right;
-        }
-        h1 { color: #087f72; font-size: clamp(2rem, 6vw, 3.5rem); }
-        a { color: #087f72; }
-        a:focus-visible { outline: 3px solid #d89b32; outline-offset: 3px; }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { scroll-behavior: auto !important; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DevManTurbo — إنشاء الفيديو بالذكاء الاصطناعي</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>DevManTurbo ⚡</h1>
-<p>نسخة مخصّصة أنشأها وطوّرها Djaafar Lecheheb من ورقلة، الجزائر.</p>
-<p>مبني على المشروع الأصلي <a href="https://github.com/harry0703/MoneyPrinterTurbo">MoneyPrinterTurbo</a>.</p>
-<p>
-    أنشئ فيديو قصيراً عالي الدقة انطلاقاً من موضوع أو كلمات مفتاحية. يساعدك التطبيق على إعداد النص، واختيار المواد المرئية، وإنشاء الترجمة الصوتية والموسيقى، ثم تركيب الفيديو.
-</p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-create" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM10 8.5v7l5.5-3.5z"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9zM19 16l.7 1.8L21.5 18.5l-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+</defs></svg>
 
-<p>
-    اختر اللغة من الواجهة، واضبط إعدادات الفيديو والصوت، ثم ابدأ الإنشاء. قد تتطلب بعض الخدمات الخارجية إعداد مفاتيح API.
-</p>
+<div class="shell">
+<aside class="side">
+  <a class="brand" href="#create"><img src="logo.svg" alt="" width="36" height="36"><span class="latin">DevManTurbo</span></a>
+  <button class="search" id="kbtn" type="button"><span>بحث وأوامر</span><kbd class="latin">Ctrl K</kbd></button>
+  <nav aria-label="التنقل الرئيسي">
+    <a href="#create" data-nav="create"><svg class="ic"><use href="#i-create"/></svg>إنشاء فيديو</a>
+    <a href="#tasks" data-nav="tasks"><svg class="ic"><use href="#i-list"/></svg>المهام <span class="badge solid" id="busy" hidden>0</span></a>
+    <a href="#settings" data-nav="settings"><svg class="ic"><use href="#i-settings"/></svg>الإعدادات</a>
+  </nav>
+  <p class="foot">نسخة مخصّصة من Djaafar Lecheheb، ورقلة، الجزائر.<br>مبنية على MoneyPrinterTurbo.</p>
+</aside>
+
+<main>
+<!-- إنشاء -->
+<section data-page="create">
+  <div class="crumbs"><span>الرئيسية</span><span>/</span><b>إنشاء فيديو</b></div>
+  <h1 class="display">حوّل فكرة إلى فيديو قصير</h1>
+  <p class="lead">اكتب الموضوع، وسيجهّز التطبيق النص والمواد المرئية والصوت والترجمة ثم يركّب الفيديو.</p>
+  <div class="grid">
+    <div class="col">
+      <article class="card">
+        <header><h2>النص</h2><span class="badge soft">الخطوة الأولى</span></header>
+        <label class="f">موضوع الفيديو<input id="subject" placeholder="مثال: كيف يغيّر الذكاء الاصطناعي حياتنا اليومية"></label>
+        <div class="row">
+          <label class="f">لغة النص<select id="language"><option value="">كشف تلقائي</option><option value="ar-DZ">العربية</option><option value="en-US">English</option><option value="fr-FR">Français</option></select></label>
+          <label class="f">عدد الفقرات<input id="paras" type="number" min="1" max="10" value="1"></label>
+        </div>
+        <button class="btn outline" id="genScript"><svg class="ic"><use href="#i-spark"/></svg>اكتب النص بالذكاء الاصطناعي</button>
+        <label class="f">نص الفيديو <small>اختياري</small><textarea id="script" rows="6" placeholder="اتركه فارغاً ليُنشأ تلقائياً"></textarea></label>
+        <button class="btn outline" id="genTerms"><svg class="ic"><use href="#i-spark"/></svg>استخرج الكلمات المفتاحية</button>
+        <label class="f">الكلمات المفتاحية <small>بالإنجليزية، مفصولة بفاصلة</small><textarea id="terms" rows="2"></textarea></label>
+      </article>
+
+      <article class="card">
+        <header><h2>الفيديو</h2></header>
+        <div class="f">النسبة<div class="seg" id="aspect" role="radiogroup">
+          <button type="button" role="radio" data-v="9:16" aria-checked="true"><i style="width:12px;height:20px"></i>عمودي 9:16</button>
+          <button type="button" role="radio" data-v="16:9" aria-checked="false"><i style="width:22px;height:13px"></i>أفقي 16:9</button>
+          <button type="button" role="radio" data-v="1:1" aria-checked="false"><i style="width:16px;height:16px"></i>مربع 1:1</button></div></div>
+        <div class="row">
+          <label class="f">مصدر المواد<select id="source"><option value="pexels">Pexels</option><option value="pixabay">Pixabay</option><option value="local">ملفات محلية</option></select></label>
+          <label class="f">ترتيب المقاطع<select id="concat"><option value="random">عشوائي</option><option value="sequential">حسب الترتيب</option></select></label>
+        </div>
+        <div class="row">
+          <label class="f">الانتقال<select id="transition"><option value="">بدون</option><option>Shuffle</option><option>FadeIn</option><option>FadeOut</option><option>SlideIn</option><option>SlideOut</option><option>ZoomIn</option><option>ZoomOut</option></select></label>
+          <label class="f">أقصى مدة للمقطع: <b id="clipV">5</b> ث<input id="clip" type="range" min="1" max="15" value="5"></label>
+        </div>
+        <label class="f">عدد الفيديوهات: <b id="countV">1</b><input id="count" type="range" min="1" max="5" value="1"></label>
+      </article>
+
+      <article class="card">
+        <header><h2>الصوت</h2></header>
+        <label class="f">صوت التعليق<select id="voice"></select></label>
+        <div class="row">
+          <label class="f">مستوى الصوت: <b id="volV">100</b>%<input id="vol" type="range" min="0" max="100" value="100"></label>
+          <label class="f">السرعة: <b id="rateV" class="latin">1.0</b>×<input id="rate" type="range" min="0.5" max="2" step="0.1" value="1"></label>
+        </div>
+        <div class="row">
+          <label class="f">الموسيقى الخلفية<select id="bgm"><option value="random">عشوائية</option><option value="">بدون</option></select></label>
+          <label class="f">مستواها: <b id="bgmV">20</b>%<input id="bgmVol" type="range" min="0" max="100" value="20"></label>
+        </div>
+      </article>
+
+      <article class="card">
+        <header><h2>الترجمة</h2><label class="sw"><input type="checkbox" id="subOn" checked><span></span><em class="sr">تفعيل الترجمة</em></label></header>
+        <div id="subBox">
+          <div class="row">
+            <label class="f">الخط<select id="font"><option>IBMPlexSansArabic-Bold.ttf</option><option>IBMPlexSansArabic-Medium.ttf</option><option>IBMPlexSansArabic-Regular.ttf</option><option>STHeitiMedium.ttc</option><option>STHeitiLight.ttc</option><option>MicrosoftYaHeiBold.ttc</option><option>BeVietnamPro-Bold.ttf</option><option>Charm-Bold.ttf</option></select></label>
+            <label class="f">الموضع<select id="pos"><option value="bottom">أسفل</option><option value="center">وسط</option><option value="top">أعلى</option><option value="two_thirds_bottom">ثلثا الأسفل</option></select></label>
+          </div>
+          <div class="row">
+            <label class="f">حجم الخط: <b id="fsV" class="latin">60</b><input id="fs" type="range" min="20" max="120" value="60"></label>
+            <label class="f">سماكة الحدّ: <b id="swV" class="latin">1.5</b><input id="sw" type="range" min="0" max="5" step="0.5" value="1.5"></label>
+          </div>
+          <div class="row sw3">
+            <label class="f">اللون<input type="color" id="fc" value="#ffffff"></label>
+            <label class="f">لون الحد<input type="color" id="sc" value="#000000"></label>
+            <label class="f">الخلفية<input type="color" id="bc" value="#000000"></label>
+          </div>
+          <label class="chk"><input type="checkbox" id="bgOn"> إضافة خلفية خلف الترجمة</label>
+        </div>
+        <p class="note">للترجمة العربية استخدم خطاً يدعم العربية، تم تضمين IBM Plex Sans Arabic في resource/fonts ويظهر أول القائمة.</p>
+      </article>
+    </div>
+
+    <aside class="col stick">
+      <article class="card pv">
+        <header><h2>المعاينة</h2><span class="badge outline latin" id="pvRes">1080×1920</span></header>
+        <div class="frame" id="frame"><svg class="gridbg" width="100%" height="100%"><defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#262626" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#g)"/></svg><div class="sub" id="sub">هكذا ستظهر الترجمة على الفيديو</div></div>
+        <button class="btn primary lg" id="go"><svg class="ic"><use href="#i-bolt"/></svg>إنشاء الفيديو</button>
+        <div id="live" hidden><div class="bar"><i id="liveBar"></i></div><p class="note" id="liveTxt"></p></div>
+      </article>
+    </aside>
+  </div>
+</section>
+
+<!-- المهام -->
+<section data-page="tasks" hidden>
+  <div class="crumbs"><span>الرئيسية</span><span>/</span><b>المهام</b></div>
+  <h1 class="heading">المهام</h1>
+  <div class="stats" id="stats"></div>
+  <div id="taskList" class="tasks"></div>
+</section>
+
+<!-- الإعدادات -->
+<section data-page="settings" hidden>
+  <div class="crumbs"><span>الرئيسية</span><span>/</span><b>الإعدادات</b></div>
+  <h1 class="heading">الإعدادات</h1>
+  <article class="card narrow">
+    <header><h2>الاتصال بالخادم</h2><span class="badge soft" id="conn">غير مفحوص</span></header>
+    <label class="f">عنوان الخادم <small>اتركه فارغاً لاستخدام نفس العنوان</small><input id="base" class="ltr" placeholder="http://127.0.0.1:8080"></label>
+    <label class="f">مفتاح API <small>إن كان مفعّلاً في config.toml</small><input id="key" class="ltr" type="password" autocomplete="off"></label>
+    <div class="row"><button class="btn primary" id="save">حفظ</button><button class="btn ghost" id="ping">فحص الاتصال</button></div>
+  </article>
+</section>
+</main>
+</div>
+<dialog id="pal"><input id="pq" placeholder="اكتب أمراً أو اسم صفحة…" autocomplete="off" aria-label="بحث"><ul id="pl" role="listbox"></ul></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
 </body>
 </html>
